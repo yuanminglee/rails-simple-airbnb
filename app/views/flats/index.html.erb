@@ -24,8 +24,8 @@
             </div>
             <div class="card-footer">
               <%= link_to "More info", flat_path(flat), class: "card-link" %>
-              <%= link_to "Edit", root_path, class: "card-link text-warning" %>
-              <%= link_to "Remove", root_path, class: "card-link text-danger" %>
+              <%= link_to "Edit", edit_flat_path(flat), class: "card-link text-warning" %>
+              <%= link_to "Remove", flat_path(flat), method: 'delete', data: { confirm: "Are you sure?" }, class: "card-link text-danger" %>
             </div>
           </div>
         </div>

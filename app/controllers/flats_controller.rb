@@ -3,7 +3,7 @@ require 'httparty'
 
 # Flats Controller
 class FlatsController < ApplicationController
-  before_action :set_flat, only: %i[show]
+  before_action :set_flat, only: %i[show edit update destroy]
 
   def index
     @flats = Flat.all
@@ -22,10 +22,32 @@ class FlatsController < ApplicationController
     @flat = Flat.new(flat_params)
 
     if @flat.save
+      flash[:notice] = 'Flat was successfully created.'
       redirect_to flat_path(@flat)
     else
       render :new
     end
+  end
+
+  def edit
+  end
+
+  def update
+    @flat.update(flat_params)
+
+    if @flat.save
+      flash[:notice] = 'Flat was successfully updated.'
+      redirect_to flat_path(@flat)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @flat.destroy
+
+    flash[:notice] = 'Flat was successfully destroyed.'
+    redirect_to root_path
   end
 
   private
