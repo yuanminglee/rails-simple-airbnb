@@ -2,35 +2,18 @@
 
 1. **Set up Frontend**
 ```
-# In the terminal
-yarn add bootstrap
-```
-
-```
-rm app/assets/stylesheets/application.css
-touch app/assets/stylesheets/application.scss
-stt
-```
-
-```
-/* application.scss */
-@import "bootstrap/scss/bootstrap"; /* picks it up in node_modules! */
+https://github.com/lewagon/rails-stylesheets/blob/master/README.md
 ```
 
 ```
 <!-- application.html.erb -->
 <head>
   <!-- ... -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 ```
 
 ```
-gem 'simple_form'
-bundle install
-rails generate simple_form:install --bootstrap
 git add .
 git commit -m "Rails new with frontend and form gems"
 ```
