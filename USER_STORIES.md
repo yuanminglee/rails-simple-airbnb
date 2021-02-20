@@ -1,9 +1,7 @@
 # Simple Airbnb — User Stories
 
-1. **Set up Frontend**
-```
+1. **Set up Frontend**  
 https://github.com/lewagon/rails-stylesheets/blob/master/README.md
-```
 
 ```
 <!-- application.html.erb -->
