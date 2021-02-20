@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'httparty'
 
 # Flats Controller
 class FlatsController < ApplicationController
@@ -9,6 +10,7 @@ class FlatsController < ApplicationController
   end
 
   def show
+    @map_url = generate_map_url(@flat.address)
     render layout: 'banner'
   end
 
@@ -27,6 +29,28 @@ class FlatsController < ApplicationController
   end
 
   private
+
+  def generate_map_url(address)
+    mb = mapbox
+    lonlat = geocode(address)
+    "#{mb[:base_url]}#{mb[:mapping]}pin-s+000(#{lonlat})/#{lonlat},10.45,0,0/600x1000?access_token=#{mb[:access_token]}"
+  end
+
+  def geocode(address)
+    mb = mapbox
+    url = "#{mb[:base_url]}#{mb[:geocode]}#{address}.json?access_token=#{mb[:access_token]}"
+    response = HTTParty.get(URI.escape(url))
+    JSON.parse(response.body)['features'].first['geometry']['coordinates'].join(',')
+  end
+
+  def mapbox
+    {
+      base_url: 'https://api.mapbox.com',
+      access_token: 'pk.eyJ1IjoieXVhbm1pbmdsZWUiLCJhIjoiY2trNWRwb3BoMXUwMDJxcGVidmEzMXRmYiJ9.zwxkyIx7ZvII9rSukRUXZw',
+      geocode: '/geocoding/v5/mapbox.places/',
+      mapping: '/styles/v1/mapbox/streets-v11/static/'
+    }
+  end
 
   def set_flat
     @flat = Flat.find(params[:id])
