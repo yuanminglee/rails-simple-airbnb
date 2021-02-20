@@ -12,8 +12,26 @@
 @import "components/index";
 @import "pages/index";
 
+abbr[title] {
+  text-decoration: none;
+}
+
+.btn {
+  border-radius: 0.25rem;
+}
+
 .card-img-top {
   width: 100%;
   height: 15vw;
   object-fit: cover
+}
+
+.banner {
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+}
+
+.margin-top-negative {
+  margin-top: -75px;
 }
