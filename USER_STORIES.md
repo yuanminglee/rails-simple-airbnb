@@ -35,9 +35,9 @@ git add .
 git commit -m "Rails new with frontend and form gems"
 ```
 
-2. **Create Flat model (scaffold)**
+2. **Create Flat model**
 ```
-rails g scaffold
+rails g model Flat ... ...
 rails db:migrate
 ```
 
@@ -49,7 +49,18 @@ rails db:migrate
 | price_per_night  | integer |
 | number_of_guests | integer |
 
-3. **Seed data**
+3. **Create FlatsController**
+```
+rails g controller flats
+```
+
+4. **Create 7 CRUD routes**
+```
+/* routes.rb */
+resources :flats
+```
+
+5. **Seed data**
 ```
 Flat.create!(
   name: 'Light & Spacious Garden Flat London',
@@ -60,7 +71,7 @@ Flat.create!(
 )
 ```
 
-4. **Implement user stories**
+6. **Implement user stories**
 
 * [ ] As a user, I can see all the available flats on our website
 * [ ] As a user, I can post a flat to the website, specifying its name and address
