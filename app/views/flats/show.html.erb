@@ -1,10 +1,15 @@
-<div class="banner" style="background-image: url('<%= @map_url %>')"></div>
+<div class="banner" style="background-image: url('<%= @flat.picture_url %>')"></div>
 <div class="container margin-top-negative">
   <div class="row">
     <div class="col-8">
       <div class="card">
         <div class="card-body">
-          <div class="card-title"><h1><%= @flat.name %></h1></div>
+          <div class="card-title d-flex">
+            <h1><%= @flat.name %></h1>
+            <%= link_to edit_flat_path(@flat), class: 'text-dark' do %>
+              <i class="ml-3 pt-2 material-icons">edit</i>
+            <% end %>
+          </div>
           <div class="card-subtitle"><h5><%= @flat.address %></h5></div>
         </div>
       </div>
@@ -12,6 +17,7 @@
         <div class="card-body">
           <div class="card-title"><h3>A bit more about this flat...</h3></div>
           <div class="card-text"><%= @flat.description %></div>
+          <%= image_tag(@map_url, class: 'card-img-bottom mt-3') %>
         </div>
       </div>
     </div>

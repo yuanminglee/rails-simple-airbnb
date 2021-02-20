@@ -6,7 +6,8 @@ class FlatsController < ApplicationController
   before_action :set_flat, only: %i[show edit update destroy]
 
   def index
-    @flats = Flat.all
+    @flats = Flat.where("name LIKE '%#{params[:query]}%'") || Flat.all
+    @total_flat_count = Flat.count
   end
 
   def show
@@ -37,7 +38,7 @@ class FlatsController < ApplicationController
 
     if @flat.save
       flash[:notice] = 'Flat was successfully updated.'
-      redirect_to flat_path(@flat)
+      redirect_to root_path
     else
       render :edit
     end
@@ -55,7 +56,7 @@ class FlatsController < ApplicationController
   def generate_map_url(address)
     mb = mapbox
     lonlat = geocode(address)
-    "#{mb[:base_url]}#{mb[:mapping]}pin-s+000(#{lonlat})/#{lonlat},10.45,0,0/600x1000?access_token=#{mb[:access_token]}"
+    "#{mb[:base_url]}#{mb[:mapping]}pin-s+000(#{lonlat})/#{lonlat},11.5,0,0/688x400?access_token=#{mb[:access_token]}"
   end
 
   def geocode(address)
@@ -79,6 +80,6 @@ class FlatsController < ApplicationController
   end
 
   def flat_params
-    params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests)
+    params.require(:flat).permit(:name, :address, :description, :picture_url, :price_per_night, :number_of_guests)
   end
 end

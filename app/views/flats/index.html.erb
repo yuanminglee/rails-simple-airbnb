@@ -1,13 +1,18 @@
 <h1>All our Flats</h1>
-<p>All <%= @flats.count %> flats.</p>
+<% if params[:query] && !params[:query].empty? %>
+  <p>You searched for <strong><%= params[:query] %></strong>. We found <%= @flats.count %> out of our <%= @total_flat_count %> on our website.</p>
+  <%= link_to("Back", root_path, class: "btn btn-primary") if @flats.count.zero? %>
+<% else %>
+  <p>All <%= @flats.count %> flats.</p>
+<% end %>
 
 <div class="container-fluid pl-0">
-  <% @flats.each_slice(3) do |row| %>
+<!--   <% @flats.each_slice(3) do |row| %>
     <div class="row mt-2 mb-4">
       <% row.each do |flat| %>
         <div class="col-sm-4 d-flex">
           <div class="card flex-fill">
-            <img class="card-img-top" src="https://source.unsplash.com/random" alt="Card image cap">
+            <img class="card-img-top" src="<%= flat.picture_url || 'https://source.unsplash.com/random' %>" alt="Card image cap">
             <div class="card-body bg-light">
               <h5 class="card-title"><%= flat.name %></h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= flat.address %></h6>
@@ -31,5 +36,8 @@
         </div>
       <% end %>
     </div>
-  <% end %>
+  <% end %> -->
+  <div class="cards">
+    <%= render @flats %>
+  </div>
 </div>
